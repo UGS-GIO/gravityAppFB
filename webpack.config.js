@@ -48,12 +48,12 @@ module.exports = {
       filename: "[name].[chunkhash].css",
       chunkFilename: "[id].css"
     }),
-    new CopyPlugin({
-      patterns: [{
-        from: '**',
-        context: 'node_modules/@esri/calcite-components/dist/calcite/',
-        to: './',
-      }]
-    })
+    // new CopyPlugin({
+    //   patterns: [{
+    //     from: '**',
+    //     context: 'node_modules/@esri/calcite-components/dist/calcite/',
+    //     to: './',
+    //   }]
+    // })
   ]
 };

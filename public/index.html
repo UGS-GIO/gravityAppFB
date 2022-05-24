@@ -9,6 +9,43 @@
     <link rel="stylesheet" href="https://js.arcgis.com/calcite-components/1.0.0-beta.82/calcite.css" />
 </head>
 <body>
-    <div id="viewDiv"></div>
-</body>
+    <calcite-loader active></calcite-loader>
+    <calcite-shell content-behind hidden>
+      <div slot="header" class="custom-header">
+        <div class="custom-header-logo">
+          <a href="https://geology.utah.gov"><img src="https://geology.utah.gov/apps/_ugsmaptemplate/logo_main.png"></a>
+        </div>
+      <h2 id="header-title" slot="header"></h2>
+
+    </div>
+      <calcite-shell-panel slot="primary-panel" detached>
+        <calcite-action-bar slot="action-bar">
+          <calcite-action data-action-id="layers" icon="layers" text="Layers"></calcite-action>
+          <calcite-action data-action-id="legend" icon="legend" text="Legend"></calcite-action>
+          <calcite-action data-action-id="basemaps" icon="basemap" text="Basemaps"></calcite-action>
+          <calcite-action data-action-id="search" icon="search" text="Search"></calcite-action>
+          <calcite-action data-action-id="information" icon="information" text="Information"></calcite-action>
+        </calcite-action-bar>
+
+        <!-- map-specific panels (each one provides a div for a ArcGIS JavaScript API widget) -->
+        <calcite-panel heading="Layers" height-scale="l" data-panel-id="layers" hidden>
+          <div id="layers-container"></div>
+        </calcite-panel>
+        <calcite-panel heading="Basemaps" height-scale="l" data-panel-id="basemaps" hidden>
+          <div id="basemaps-container"></div>
+        </calcite-panel>
+        <calcite-panel heading="Legend" height-scale="l" data-panel-id="legend" hidden>
+          <div id="legend-container"></div>
+        </calcite-panel>
+        <calcite-panel heading="Search" height-scale="l" data-panel-id="search" hidden>
+          <div id="search-container"></div>
+        </calcite-panel>
+        <calcite-panel heading="Info Panel" height-scale="l" data-panel-id="information" hidden>
+          Poop
+        </calcite-panel>
+
+      </calcite-shell-panel>
+      <div id="viewDiv"></div>
+    </calcite-shell>
+  </body>
 </html>
