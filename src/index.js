@@ -2,6 +2,8 @@
 
 import Map from "@arcgis/core/Map";
 import MapView from "@arcgis/core/views/MapView";
+
+import ImageryLayer from "@arcgis/core/layers/ImageryLayer";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import LabelClass from "@arcgis/core/layers/support/LabelClass";
 import LayerList from "@arcgis/core/widgets/LayerList";
@@ -102,7 +104,79 @@ view.when(() => {
           container: "legend-container"
         });
 
+      //gravity imagery layer
+      var gravityRaster = new ImageryLayer({
+        url: "https://webmaps.geology.utah.gov/arcgis/rest/services/Energy_Mineral/gravityapp_CompleteBougerGravityAnomaly/ImageServer",
+        visible: true,
+        //legendEnabled: false,
+        //listMode: "hide",
+        title: "Gravity Raster",
+        //pixelFilter: colorize,
+        //opacity: 0,
+        popupTemplate: {
+
+            title: "<b>Complete Bouger Gravity Anomaly</b>",
+            content: "{Raster.ServicePixelValue.Raw}  mGal's"
+
+        }
+    });
+
+        //symbolize gravityRaster
+        function colorize(pixelData) {
+            console.log("coloring");
+            var pixelBlock, factor, minValue, maxValue;
+    
+            if (
+                pixelData === null ||
+                pixelData.pixelBlock === null ||
+                pixelData.pixelBlock.pixels === null
+            ) {
+                return;
+            }
+    
+            // The pixelBlock stores the values of all pixels visible in the view
+            pixelBlock = pixelData.pixelBlock;
+            console.log(pixelBlock);
+    
+            // Get the min and max values of the data in the current view
+            minValue = pixelBlock.statistics[0].minValue;
+            maxValue = pixelBlock.statistics[0].maxValue;
+    
+            // The pixels visible in the view
+            var pixels = pixelBlock.pixels;
+    
+            // The number of pixels in the pixelBlock
+            var numPixels = pixelBlock.width * pixelBlock.height;
+    
+            // Calculate the factor by which to determine the red and blue
+            // values in the colorized version of the layer
+            factor = 255.0 / (maxValue - minValue);
+    
+            // Get the pixels containing temperature values in the only band of the data
+            var tempBand = pixels[0];
+    
+            // Create empty arrays for each of the RGB bands to set on the pixelBlock
+            var rBand = [];
+            var gBand = [];
+            var bBand = [];
+    
+            // Loop through all the pixels in the view
+            for (i = 0; i < numPixels; i++) {
+                // Get the pixel value (the temperature) recorded at the pixel location
+                var tempValue = tempBand[i];
+                // Calculate the red value based on the factor
+                var red = (tempValue - minValue) * factor;
+    
+                // Sets a color between blue (coldest) and red (warmest) in each band
+                rBand[i] = red;
+                gBand[i] = 0;
+                bBand[i] = 255 - red;
+            }
+    
+            // Set the new pixel values on the pixelBlock
+            pixelData.pixelBlock.pixels = [rBand, gBand, bBand];
+            pixelData.pixelBlock.pixelType = "U8"; // U8 is used for color
+        }
   
   
-  
-  //map.add(rockcore);
+  map.add(gravityRaster);
