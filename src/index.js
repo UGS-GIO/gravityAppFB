@@ -112,7 +112,7 @@ view.when(() => {
         //listMode: "hide",
         title: "Gravity Raster",
         //pixelFilter: colorize,
-        //opacity: 0,
+        opacity: 0.7,
         popupTemplate: {
 
             title: "<b>Complete Bouger Gravity Anomaly</b>",
