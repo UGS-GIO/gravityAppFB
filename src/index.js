@@ -104,6 +104,20 @@ view.when(() => {
           container: "legend-container"
         });
 
+    //forge gravity data
+    var forgeGravity = new FeatureLayer({
+        url: "https://webmaps.geology.utah.gov/arcgis/rest/services/Energy_Mineral/gravityapp_gravitypoints/MapServer/0",
+        visible: true,
+        title: "FORGE UGS CBGA"
+    });
+    
+        //legacy paces gravity data
+        var pacesGravity = new FeatureLayer({
+            url: "https://webmaps.geology.utah.gov/arcgis/rest/services/Energy_Mineral/gravityapp_gravitypoints/MapServer/1",
+            visible: true,
+            title: "PACES CBGA"
+        });
+
       //gravity imagery layer
       var gravityRaster = new ImageryLayer({
         url: "https://webmaps.geology.utah.gov/arcgis/rest/services/Energy_Mineral/gravityapp_CompleteBougerGravityAnomaly/ImageServer",
@@ -180,3 +194,5 @@ view.when(() => {
   
   
   map.add(gravityRaster);
+  map.add(forgeGravity);
+  map.add(pacesGravity);
