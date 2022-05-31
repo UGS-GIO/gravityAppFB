@@ -92,30 +92,51 @@ view.when(() => {
           view,
           container: "basemaps-container"
         });
-  
+
         const layerList = new LayerList({
-          view,
-          selectionEnabled: true,
-          container: "layers-container"
-        });
+            view: view,
+            container: "layers-container",
+            listItemCreatedFunction: (event) => {
+              const item = event.item;
+              if (item.layer.type != "group") {
+                // don't show legend twice
+                item.panel = {
+                  content: "legend",
+                  open: true
+                };
+              }
+            }
+          });
   
-        const legend = new Legend({
-          view,
-          container: "legend-container"
-        });
+        // const legend = new Legend({
+        //   view,
+        //   container: "legend-container"
+        // });
 
     //forge gravity data
     var forgeGravity = new FeatureLayer({
         url: "https://webmaps.geology.utah.gov/arcgis/rest/services/Energy_Mineral/gravityapp_gravitypoints/MapServer/0",
         visible: true,
-        title: "FORGE UGS CBGA"
+        title: "FORGE UGS CBGA",
+        popupTemplate: {
+
+            title: "<b>UGS Station {station} of Project {project}</b>",
+            content: "<b>Station: </b>{station}<br><b>Location: </b>{longitude}, {latitude}, {elevation}</b><br><b>Vertical accuracy: </b>{z_rms}<br><b>Observed gravity: </b>{observation}<br><b>Date measured: </b>{date}<br><b>IZTC: </b>{iztc}<br><b>OZTC: </b>{oztc}<br><b>CBGA: </b>{cbga}"
+
+        }
     });
     
         //legacy paces gravity data
         var pacesGravity = new FeatureLayer({
             url: "https://webmaps.geology.utah.gov/arcgis/rest/services/Energy_Mineral/gravityapp_gravitypoints/MapServer/1",
             visible: true,
-            title: "PACES CBGA"
+            title: "PACES CBGA",
+            popupTemplate: {
+
+                title: "<b>Legacy Station {station}</b>",
+                content: "<b>Station: </b>{station}<br><b>Location: </b>{longitude}, {latitude}, {elevation}<br><b>Observed gravity: </b>{observation}<br><b>IZTC: </b>{iztc}<br><b>OZTC: </b>{oztc}<br><b>CBGA: </b>{cbga}"
+    
+            }
         });
 
       //gravity imagery layer
