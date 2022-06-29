@@ -5,10 +5,10 @@ import MapView from "@arcgis/core/views/MapView";
 
 import ImageryLayer from "@arcgis/core/layers/ImageryLayer";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
-import LabelClass from "@arcgis/core/layers/support/LabelClass";
 import LayerList from "@arcgis/core/widgets/LayerList";
-import Legend from "@arcgis/core/widgets/Legend";
 import BasemapGallery from "@arcgis/core/widgets/BasemapGallery";
+import Home from "@arcgis/core/widgets/Home";
+import Locate from "@arcgis/core/widgets/Locate";
 import "@esri/calcite-components/dist/calcite/calcite.css";
 import { setAssetPath } from "@esri/calcite-components/dist/components";
 
@@ -43,6 +43,10 @@ const view = new MapView({
   zoom: 7,
   center: [-111.68, 39.33]
 });
+
+let homeWidget = new Home({
+    view: view
+  });
 
 view.when(() => {
     let actionBarExpanded = false;
@@ -87,6 +91,7 @@ view.when(() => {
   document.querySelector("calcite-loader").active = false;
   
   view.ui.move("zoom", "top-right");
+  view.ui.add(homeWidget, "top-right");
   
         const basemaps = new BasemapGallery({
           view,
@@ -107,7 +112,7 @@ view.when(() => {
               }
             }
           });
-  
+   
         // const legend = new Legend({
         //   view,
         //   container: "legend-container"
