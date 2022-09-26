@@ -1,38 +1,92 @@
 {
   
   "name": "gravity",
+  
   "version": "1.0.0",
+  
   "description": "",
+  
   "main": "index.js",
+  
   "scripts": {
-    "build": "webpack --mode production",
-    "watch": "webpack -w",
-    "start": "webpack serve --mode development"
+  
+    
+  "build": "webpack --mode production",
+  
+    
+  "watch": "webpack -w",
+  
+    
+  "start": "webpack serve --mode development"
+  
   },
+  
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/UGS-GIO/gravityApp.git"
+  
+    
+  "type": "git",
+  
+    
+  "url": "git+https://github.com/UGS-GIO/gravityApp.git"
+  
   },
+  
   "author": "",
+  
   "license": "ISC",
+  
   "bugs": {
-    "url": "https://github.com/UGS-GIO/gravityApp/issues"
+  
+    
+  "url": "https://github.com/UGS-GIO/gravityApp/issues"
+  
   },
+  
   "homepage": "https://github.com/UGS-GIO/gravityApp#readme",
+  
   "devDependencies": {
-    "css-loader": "^6.7.1",
-    "file-loader": "^6.2.0",
-    "html-webpack-plugin": "^5.5.0",
-    "mini-css-extract-plugin": "^2.6.0",
-    "source-map-loader": "^3.0.1",
-    "webpack": "^5.72.1",
-    "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.9.0"
+  
+    
+  "css-loader": "^6.7.1",
+  
+    
+  "file-loader": "^6.2.0",
+  
+    
+  "html-webpack-plugin": "^5.5.0",
+  
+    
+  "mini-css-extract-plugin": "^2.6.0",
+  
+    
+  "source-map-loader": "^3.0.1",
+  
+    
+  "webpack": "^5.74.0",
+  
+    
+  "webpack-cli": "^4.10.0",
+  
+    
+  "webpack-dev-server": "^4.11.1"
+  
   },
+  
   "private": true,
+  
   "dependencies": {
-    "@arcgis/core": "^4.23.7",
-    "@esri/calcite-components": "^1.0.0-beta.82",
-    "firebase": "^9.8.1"
+  
+    
+  "@arcgis/core": "^4.23.7",
+  
+    
+  "@esri/calcite-components": "^1.0.0-beta.82",
+  
+    
+  "firebase": "^9.8.1",
+  
+    
+  "firebase-functions": "^3.24.0"
+  
   }
 }
